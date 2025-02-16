@@ -1,0 +1,62 @@
+import requests
+
+class RealTimeProcessor:
+    def __init__(self):
+        # API Keys (Replace with your actual API keys)
+        self.weather_api_key = "YOUR_OPENWEATHER_API_KEY"
+        self.news_api_key = "YOUR_NEWSAPI_KEY"
+        self.stock_api_key = "YOUR_ALPHAVANTAGE_API_KEY"
+
+    def get_weather(self, location):
+        """Fetches real-time weather data for a given location."""
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={self.weather_api_key}&units=metric"
+        response = requests.get(url).json()
+        
+        if response.get("cod") != 200:
+            return f"❌ Could not fetch weather for {location}. Try again."
+        
+        weather = response["weather"][0]["description"].title()
+        temperature = response["main"]["temp"]
+        return f"🌦️ Weather in {location}: {weather}, {temperature}°C"
+
+    def get_news(self, topic):
+        """Fetches latest news headlines related to a topic."""
+        url = f"https://newsapi.org/v2/everything?q={topic}&apiKey={self.news_api_key}&pageSize=3"
+        response = requests.get(url).json()
+        
+        if response.get("status") != "ok":
+            return f"❌ Could not fetch news about {topic}. Try again."
+
+        articles = response["articles"]
+        news_summary = "\n".join([f"📰 {article['title']} ({article['source']['name']})" for article in articles])
+        return f"🗞️ Latest News on {topic}:\n{news_summary}"
+
+    def get_stock_price(self, symbol):
+        """Fetches real-time stock price for a given company symbol."""
+        url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={self.stock_api_key}"
+        response = requests.get(url).json()
+        
+        if "Global Quote" not in response:
+            return f"❌ Could not fetch stock price for {symbol}. Try again."
+
+        stock_price = response["Global Quote"]["05. price"]
+        return f"📈 Stock Price of {symbol}: ${stock_price}"
+
+    def process(self, query):
+        """Processes different types of real-time queries."""
+        query_lower = query.lower()
+
+        if "weather in" in query_lower:
+            location = query_lower.replace("weather in", "").strip()
+            return self.get_weather(location)
+
+        elif "news about" in query_lower or "latest news on" in query_lower:
+            topic = query_lower.replace("news about", "").replace("latest news on", "").strip()
+            return self.get_news(topic)
+
+        elif "stock price of" in query_lower:
+            symbol = query_lower.replace("stock price of", "").strip().upper()
+            return self.get_stock_price(symbol)
+
+        else:
+            return "⚡ Real-time query detected, but no matching category found. Try asking about weather, news, or stock prices!"

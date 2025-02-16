@@ -22,7 +22,51 @@ Modular Design for future automation, GUI, and OS integration
 
 ---
 
-🛠️ Features
+🛠️ Features of Tejas AI
+
+🔒 Face Unlock
+
+Tejas AI ensures secure access with face recognition. When you start the system, it scans your face and grants access only if it matches an authorized user.
+
+🎙️ Speech-to-Text (STT) & Text-to-Speech (TTS)
+
+You can interact with the AI using voice commands. It converts speech to text for processing and responds using AI-generated speech.
+
+📄 Optical Character Recognition (OCR)
+
+The AI can scan images and extract text, making it useful for reading documents, handwritten notes, and printed text.
+
+🔍 Barcode & QR Code Scanner
+
+It detects and reads barcodes and QR codes from images or real-time camera input.
+
+🖼️ Image Recognition
+
+The AI can identify objects, scenes, and elements within an image using deep learning-based recognition.
+
+📦 Object Detection
+
+Using advanced computer vision models, the AI detects objects in real time, highlighting and classifying them from a live camera feed.
+
+🌎 Real-Time Environment Scanning
+
+The AI processes the surroundings through a real-time camera feed, identifying objects and analyzing the environment dynamically.
+
+🏗️ 3D Model Reconstruction
+
+By scanning real-world objects, Tejas AI creates a 3D model, reconstructing shapes and structures from camera input.
+
+🎨 AI Image Generation
+
+The system can generate AI-created images based on a text prompt, allowing users to create artwork, designs, and conceptual visuals.
+
+🤖 AI Chatbot with LLaMA & ChromaDB
+
+Tejas AI processes queries intelligently, responding with well-structured answers using an AI chatbot powered by LLaMA and ChromaDB.
+
+🛠️ Modular System
+
+The project is structured into multiple modules, making it easy to extend functionality. Future integrations include Automation, GUI, and OS controls for enhanced AI-powered tasks.
 
 
 ---
